@@ -1,29 +1,37 @@
 <div class="container">
-  <h1 class="mt-4">Proyecto Inteligentes 2</h1>
-  <div>
-    <select name="noseleccionado" id="noseleccionado">
-      <option value="kmeans">KMeans</option>
-      <option value="knn">Knn</option>
-      <option value="id3">Id3</option>
-      <option value="naive bayes">Naive Bayes</option>
-      <option value="svm">SVM</option>
-    </select>
-  </div>
+    <h1 class="mt-4">Proyecto Inteligentes 2</h1>
+    <div>
+        <span>Selecciona un algoritmo&nbsp;</span>
+        <select name="algorithm-select" id="algorithm-select" (change)="handleAlgorithmSelect($event)">
+        <option value="" disabled>Selecciona un algoritmo</option>
+        <option value="kmeans">KMeans</option>
+        <option value="knn">Knn</option>
+        <option value="id3">Id3</option>
+        <option value="nbayes">Naive Bayes</option>
+        <option value="svm">SVM</option>
+      </select>
+    </div>
 
-  <input class="form-control mb-5" type="file" class="upload" (change)="changeListener($event)">
+    <div>
+        <input class="form-control mb-5" type="file" class="upload" (change)="changeListener($event)">
+    </div>
 
-  <table class="table table-bordered table-dark mt-5">
-    <thead>
-      <tr>
-        <th *ngFor="let item of lines[0]; let i = index"><button  (click)="obtenerItem(item)">{{item}}</button></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of linesR[0]; let i = index">
-        <td *ngFor="let itemm of lines[0]; let j = index">{{item[j]}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <div *ngIf="dataset !== null">
+        <button (click)="runAlgorithm()">Run</button>
+    </div>
+
+    <table class="table table-bordered table-dark mt-5">
+        <thead>
+            <tr>
+                <th *ngFor="let item of lines[0]; let i = index"><button (click)="obtenerItem(item, i)">{{item}}</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of linesR[0]; let i = index">
+                <td *ngFor="let itemm of lines[0]; let j = index">{{item[j]}}</td>
+            </tr>
+        </tbody>
+    </table>
 
 
 </div>
